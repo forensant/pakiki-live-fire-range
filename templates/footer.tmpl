@@ -1,0 +1,42 @@
+{{define "Footer"}}
+      </div>
+    </section>
+
+  </div>
+  <footer class="footer pt-5 mt-2">
+    <div class="container">
+      <div class=" row">
+        <div class="col-12">
+          <div class="text-center">
+            <p class="text-dark my-4 text-sm font-weight-normal">
+              All rights reserved. Copyright © <script>
+                document.write(new Date().getFullYear())
+              </script>. Made with <i class="fas fa-heart"></i> by the <a href="https://proximityhq.com/">Proximity</a> team.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+  <script src="assets/js/plugins/countup.min.js"></script>
+  <script src="assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
+
+  <script>
+    if (document.getElementsByClassName('page-header')) {
+      window.onscroll = debounce(function() {
+        var scrollPosition = window.pageYOffset;
+        var bgParallax = document.querySelector('.page-header');
+        var oVal = (window.scrollY / 3);
+        bgParallax.style.transform = 'translate3d(0,' + oVal + 'px,0)';
+      }, 6);
+    }
+  </script>
+</body>
+
+</html>
+{{end}}
