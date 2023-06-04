@@ -27,6 +27,15 @@ type TemplateInput struct {
 
 var menu = []MenuCategory{
 	{
+		Name: "Behaviours",
+		Items: []MenuItem{
+			{
+				Name: "Long Request",
+				Path: "/behaviours/long-request",
+			},
+		},
+	},
+	{
 		Name: "Reconissance",
 		Items: []MenuItem{
 			{
@@ -52,10 +61,11 @@ var menu = []MenuCategory{
 
 func main() {
 	log.Print("starting server...")
-	fileServer := http.FileServer(http.Dir("./static"))
+	fileServer := http.FileServer(http.Dir("./static/"))
 	http.Handle("/assets/", fileServer)
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/not-implemented", notImplementedHandler)
+	http.HandleFunc("/behaviours/long-request", longRequestHandler)
 
 	// Determine port for HTTP service.
 	port := os.Getenv("PORT")

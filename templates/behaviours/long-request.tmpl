@@ -1,0 +1,27 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>Long Request</h3>
+    <p class="mb-4 mt-4">
+        This page will take the given number of seconds to load:
+        
+            <form method="get">
+            <div class="row">
+          <div class="col-4">
+                <div class="input-group input-group-outline my-3">
+                        <label class="form-label">Seconds</label>
+                    <input type="input" class="form-control" name="sleep">
+                </div>            
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-1">
+                <button class="btn btn-success" type="submit">Reload</button>
+        </div>
+        </form>
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}
