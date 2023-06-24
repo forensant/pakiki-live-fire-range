@@ -84,9 +84,9 @@ func main() {
 func renderTemplate(w http.ResponseWriter, templateName string, input TemplateInput) {
 	input.MenuCategories = menu
 	if input.Title == "" {
-		input.Title = "Pakiki Proxy — Live Fire Range"
+		input.Title = "Pākiki Proxy — Live Fire Range"
 	} else {
-		input.Title = input.Title + " — Pakiki Proxy Live Fire Range"
+		input.Title = input.Title + " — Pākiki Proxy Live Fire Range"
 	}
 
 	paths := []string{
