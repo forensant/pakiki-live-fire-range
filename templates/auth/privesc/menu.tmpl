@@ -1,0 +1,43 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>Privilege escalation</h3>
+    <p class="mb-4 mt-4">
+        You are logged in as {{.Additional.User}}.<br/><br/>
+
+        {{if .Additional.Admin}}
+            <b>Posts:</b><br/>
+            <a href="/auth/privesc/post?id=1">ABC - Post from regular user</a><br/>
+            <a href="/auth/privesc/post?id=2">123 - Draft post from admin</a><br/>
+            <a href="/auth/privesc/post?id=3">XYZ - Draft post from another user</a><br/>
+
+            <br/><br>
+
+            <b>Users:</b><br/>
+            <a href="/auth/privesc/users?action=list">Manage users</a><br/>
+            <a href="/auth/privesc/users?action=view&id=1">Regular user 1</a><br/>
+            <a href="/auth/privesc/users?action=view&id=2">Regular user 2</a><br/>
+            <a href="/auth/privesc/users?action=view&id=3">Regular user 3</a><br/>
+            <a href="/auth/privesc/users?action=view&id=4">Admin</a><br/>
+        {{else}}
+            <b>Posts:</b><br/>
+            <a href="/auth/privesc/post?id=1">ABC - Post from regular user</a><br/>
+            
+            <br/><br/>
+            
+            <b>Users:</b><br/>
+            <a href="/auth/privesc/users?action=view&id=1">Manage my account</a><br/>
+        {{end}}
+
+        <br/>
+        <form method="POST" action="/auth/privesc/login">
+            <input type="hidden" name="username" value="">
+            <input type="hidden" name="password" value="">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}

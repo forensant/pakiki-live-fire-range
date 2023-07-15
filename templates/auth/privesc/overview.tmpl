@@ -1,0 +1,24 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>Privilege escalation</h3>
+    <p class="mb-4 mt-4">
+        This example contains pages which should only be accessible to the administrator.<br/><br/>
+
+        <form method="POST" action="/auth/privesc/login">
+            <input type="hidden" name="username" value="admin">
+            <input type="hidden" name="password" value="password">
+            <button type="submit" class="btn btn-primary">Login as admin</button>
+        </form>
+        <br/>
+        <form method="POST" action="/auth/privesc/login">
+            <input type="hidden" name="username" value="reguser">
+            <input type="hidden" name="password" value="password">
+            <button type="submit" class="btn btn-primary">Login as a regular user</button>
+        </form>
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}

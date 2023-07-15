@@ -45,6 +45,15 @@ var menu = []MenuCategory{
 		},
 	},
 	{
+		Name: "Authorisation",
+		Items: []MenuItem{
+			{
+				Name: "Privilege Escalation",
+				Path: "/auth/privesc/overview",
+			},
+		},
+	},
+	{
 		Name: "Cryptography",
 		Items: []MenuItem{
 			{
@@ -69,6 +78,11 @@ func main() {
 	http.HandleFunc("/recon", reconHandler)
 	http.HandleFunc("/recon/Ysiewc58rC", reconSecretPage1Handler)
 	http.HandleFunc("/recon/NVCwG68UI4", reconSecretPage2Handler)
+	http.HandleFunc("/auth/privesc/overview", privescOverview)
+	http.HandleFunc("/auth/privesc/login", privescAuthorisationLogin)
+	http.HandleFunc("/auth/privesc/menu", privescMenu)
+	http.HandleFunc("/auth/privesc/users", privescPage)
+	http.HandleFunc("/auth/privesc/post", privescPage)
 	http.HandleFunc("/not-implemented", notImplementedHandler)
 	http.HandleFunc("/behaviours/long-request", longRequestHandler)
 
