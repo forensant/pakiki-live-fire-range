@@ -40,7 +40,7 @@ var menu = []MenuCategory{
 		Items: []MenuItem{
 			{
 				Name: "Overview",
-				Path: "/not-implemented",
+				Path: "/recon",
 			},
 		},
 	},
@@ -64,6 +64,11 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./static/"))
 	http.Handle("/assets/", fileServer)
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/robots.txt", robotsHandler)
+	http.HandleFunc("/sitemap.xml", sitemapHandler)
+	http.HandleFunc("/recon", reconHandler)
+	http.HandleFunc("/recon/Ysiewc58rC", reconSecretPage1Handler)
+	http.HandleFunc("/recon/NVCwG68UI4", reconSecretPage2Handler)
 	http.HandleFunc("/not-implemented", notImplementedHandler)
 	http.HandleFunc("/behaviours/long-request", longRequestHandler)
 
