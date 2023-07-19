@@ -51,6 +51,10 @@ var menu = []MenuCategory{
 				Name: "Privilege Escalation",
 				Path: "/auth/privesc/overview",
 			},
+			{
+				Name: "Insecure Direct Object Reference",
+				Path: "/auth/idor",
+			},
 		},
 	},
 	{
@@ -78,6 +82,7 @@ func main() {
 	http.HandleFunc("/recon", reconHandler)
 	http.HandleFunc("/recon/Ysiewc58rC", reconSecretPage1Handler)
 	http.HandleFunc("/recon/NVCwG68UI4", reconSecretPage2Handler)
+	http.HandleFunc("/auth/idor", idorHandler)
 	http.HandleFunc("/auth/privesc/overview", privescOverview)
 	http.HandleFunc("/auth/privesc/login", privescAuthorisationLogin)
 	http.HandleFunc("/auth/privesc/menu", privescMenu)

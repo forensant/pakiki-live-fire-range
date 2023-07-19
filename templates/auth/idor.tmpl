@@ -1,0 +1,16 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>Insecure Direct Object Reference</h3>
+    <p class="mb-4 mt-4">
+        {{ if .Additional.LoggedIn }}
+          You are currently logged in as {{ .Additional.Username }}
+        {{ else }}
+          Could not find user with the given ID.
+        {{ end }}
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}
