@@ -1,0 +1,39 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>SQL Injection</h3>
+    <p class="mb-4 mt-4">
+        {{if .Additional.AuthSuccessful}}
+            <stong>Authentication Successful</strong>
+            <br/><br/>
+        {{else}}
+
+            {{if .Additional.AttemptMade}}
+                <stong>Authentication Failed</strong>
+                <br/><br/>
+            {{end}}
+
+            <form method="POST" action="/injection/sqli">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline my-3">
+                            <input type="text" class="form-control" id="username" name="username" value="admin">
+                        </div>
+
+                        <div class="input-group input-group-outline my-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </div>  
+            </form>
+        {{end}}
+
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}

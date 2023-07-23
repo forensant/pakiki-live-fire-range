@@ -1,0 +1,19 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>XSS</h3>
+    <p class="mb-4 mt-4">
+        {{if .Additional.Name}}
+            Welcome {{.Additional.Name}}!
+        {{end}}
+
+        <form method="POST" action="/injection/xss">
+            Name: <input type="text" name="name"/><br/><br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}

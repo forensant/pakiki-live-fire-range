@@ -58,6 +58,19 @@ var menu = []MenuCategory{
 		},
 	},
 	{
+		Name: "Injection",
+		Items: []MenuItem{
+			{
+				Name: "XSS",
+				Path: "/injection/xss",
+			},
+			{
+				Name: "SQL Injection",
+				Path: "/injection/sqli",
+			},
+		},
+	},
+	{
 		Name: "Cryptography",
 		Items: []MenuItem{
 			{
@@ -88,6 +101,8 @@ func main() {
 	http.HandleFunc("/auth/privesc/menu", privescMenu)
 	http.HandleFunc("/auth/privesc/users", privescPage)
 	http.HandleFunc("/auth/privesc/post", privescPage)
+	http.HandleFunc("/injection/xss", xssHandler)
+	http.HandleFunc("/injection/sqli", sqliHandler)
 	http.HandleFunc("/not-implemented", notImplementedHandler)
 	http.HandleFunc("/behaviours/long-request", longRequestHandler)
 
