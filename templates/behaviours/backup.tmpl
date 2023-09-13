@@ -1,0 +1,16 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>Backup</h3>
+    <p class="mb-4 mt-4">
+        There are backup files which are variations to this page.
+
+        {{if .Additional.BackupFile}}
+          THIS IS A BACKUP FILE
+        {{end}}
+    </p>
+  </div>
+</div>
+
+{{template "Footer"}}

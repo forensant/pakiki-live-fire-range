@@ -33,6 +33,10 @@ var menu = []MenuCategory{
 				Name: "Long Request",
 				Path: "/behaviours/long-request",
 			},
+			{
+				Name: "Backup Files",
+				Path: "/behaviours/backup.html",
+			},
 		},
 	},
 	{
@@ -105,6 +109,9 @@ func main() {
 	http.HandleFunc("/injection/sqli", sqliHandler)
 	http.HandleFunc("/not-implemented", notImplementedHandler)
 	http.HandleFunc("/behaviours/long-request", longRequestHandler)
+	http.HandleFunc("/behaviours/Copy_of_backup.html", backupFileHandlerFile)
+	http.HandleFunc("/behaviours/backup.html.bak", backupFileHandlerFile)
+	http.HandleFunc("/behaviours/backup.html", backupFileHandlerBase)
 
 	// Determine port for HTTP service.
 	port := os.Getenv("PORT")

@@ -6,6 +6,22 @@ import (
 	"time"
 )
 
+func backupFileHandlerBase(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "behaviours/backup", TemplateInput{Title: "Backup Files", Additional: struct {
+		BackupFile bool
+	}{
+		BackupFile: false,
+	}})
+}
+
+func backupFileHandlerFile(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "behaviours/backup", TemplateInput{Title: "Backup Files", Additional: struct {
+		BackupFile bool
+	}{
+		BackupFile: true,
+	}})
+}
+
 func longRequestHandler(w http.ResponseWriter, r *http.Request) {
 	timeoutStr := r.FormValue("sleep")
 	timeout, err := strconv.Atoi(timeoutStr)
