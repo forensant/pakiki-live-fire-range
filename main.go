@@ -153,8 +153,18 @@ func renderTemplate(w http.ResponseWriter, templateName string, input TemplateIn
 	}
 }
 
+func handleDirListing(w http.ResponseWriter, r *http.Request) bool {
+	if r.FormValue("M") == "D" || r.FormValue("S") == "D" {
+		renderTemplate(w, "behaviours/dir-listing", TemplateInput{})
+		return true
+	}
+	return false
+}
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "index", TemplateInput{})
+	if !handleDirListing(w, r) {
+		renderTemplate(w, "index", TemplateInput{})
+	}
 }
 
 func notImplementedHandler(w http.ResponseWriter, r *http.Request) {
