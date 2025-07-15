@@ -2,6 +2,7 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"html/template"
 	"log"
 	"net/http"
@@ -74,6 +75,15 @@ var menu = []MenuCategory{
 			},
 		},
 	},
+	/*{
+		Name: "AI",
+		Items: []MenuItem{
+			{
+				Name: "Prompt Injection",
+				Path: "/ai/prompt-injection",
+			},
+		},
+	},*/
 	{
 		Name: "Cryptography",
 		Items: []MenuItem{
@@ -90,6 +100,11 @@ var menu = []MenuCategory{
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	log.Print("starting server...")
 	fileServer := http.FileServer(http.Dir("./static/"))
 	http.Handle("/assets/", fileServer)
@@ -99,6 +114,8 @@ func main() {
 	http.HandleFunc("/recon", reconHandler)
 	http.HandleFunc("/recon/Ysiewc58rC", reconSecretPage1Handler)
 	http.HandleFunc("/recon/NVCwG68UI4", reconSecretPage2Handler)
+	http.HandleFunc("/ai/chat", aiChatResponse)
+	http.HandleFunc("/ai/prompt-injection", aiPromptInjectionHandler)
 	http.HandleFunc("/auth/idor", idorHandler)
 	http.HandleFunc("/auth/privesc/overview", privescOverview)
 	http.HandleFunc("/auth/privesc/login", privescAuthorisationLogin)

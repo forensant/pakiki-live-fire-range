@@ -1,0 +1,125 @@
+{{template "Header" .}}
+
+<div class="row">
+  <div class="col-12 mx-4">
+    <h3>Prompt Injection</h3>
+    <p class="mb-4 mt-4">
+        Test2
+        <div class="card card-frame">
+          <div class="card-body">
+
+            <div id="chat-history">
+            </div>
+
+            <form onsubmit="return chatPrompt(event);" class="mt-3">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Chat Prompt</label>
+                    <input type="text" class="form-control" id="chat-prompt" >
+                </div>
+            </form>
+          </div>
+        </div>
+    </p>
+  </div>
+</div>
+
+<script>
+
+let all_messages = {
+   "messages": [
+       {sender: "assistant", message: "Hello, how can I help you?"},
+   ]
+};
+
+function setChatHistory(messages) {
+    var chatHistory = document.getElementById("chat-history");
+
+    // clear the chat history
+    chatHistory.innerHTML = "";
+
+    messages = messages.messages;
+
+    // create a div for each message
+    for (var i = 0; i < messages.length; i++) {
+        var message = messages[i];
+
+        var div = document.createElement("div");
+        if (message.sender === "user") {
+            div.classList.add("text-end");
+            div.classList.add("bg-secondary");
+            div.classList.add("text-white");
+        }
+        div.classList.add("p-2");
+
+        div.innerText = message.message;
+        chatHistory.appendChild(div);
+    }
+}
+
+setChatHistory(all_messages);
+
+function chatPrompt(e) {
+    e.preventDefault();
+
+    var chatPrompt = document.getElementById("chat-prompt").value;
+    if (chatPrompt === "") {
+        return true;
+    }
+
+    all_messages.messages.push({sender: "user", message: chatPrompt});
+    all_messages.messages.push({sender: "assistant", message: ""});
+    setChatHistory(all_messages);
+
+    // clear the prompt
+    document.getElementById("chat-prompt").value = "";
+
+    // send a request to the server with the messages
+    fetch("/ai/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(all_messages),
+    }).then((response) => {
+        const reader = response.body.getReader();
+
+        return new ReadableStream({
+            start(controller) {
+                return pump();
+
+                function pump() {
+                    return reader.read().then(({ done, value }) => {
+                        // When no more data needs to be consumed, close the stream
+                        if (done) {
+                            controller.close();
+                            return;
+                        }
+
+                        // handle the received data
+                        const s = new TextDecoder().decode(value);
+                        all_messages.messages[all_messages.messages.length - 1].message += s;
+                        setChatHistory(all_messages);
+                        
+                        return pump();
+                    });
+                }
+            }
+        });
+
+        /*reader.read().then(({ value }) => {
+            // append to the last message
+            const s = new TextDecoder().decode(value);
+            all_messages.messages[all_messages.messages.length - 1].message += s;
+            setChatHistory(all_messages);
+        });*/
+    }); /*.then((data) => {
+        all_messages = data;
+        setChatHistory(all_messages);
+    });*/
+
+    return true;
+}
+
+</script>
+
+{{template "Footer"}}
